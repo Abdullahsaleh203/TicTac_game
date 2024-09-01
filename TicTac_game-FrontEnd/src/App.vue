@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import io from 'socket.io-client'
+const socket = io("http://localhost:8000")
 export default {
   name: 'App',
   components: {
@@ -89,6 +91,12 @@ export default {
       }
     }
   },
+  created() {
+    socket.on("play", (index) => {
+      console.log("received index", index)
+      this.draw(index, true)
+    })
+  }
 }
 </script>
 
